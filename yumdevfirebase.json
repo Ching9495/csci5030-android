@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1082695730018",
+    "firebase_url": "https://yumdev-4cf1c.firebaseio.com",
+    "project_id": "yumdev-4cf1c",
+    "storage_bucket": "yumdev-4cf1c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082695730018:android:710fad78872978948fe23b",
+        "android_client_info": {
+          "package_name": "com.slu.yumdev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1082695730018-rc9srubhqe61suvm9e7b5lj7qngq6gmo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5_qZlZE8EnY4weuxlbx3bLIBpACQ33pc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1082695730018-rc9srubhqe61suvm9e7b5lj7qngq6gmo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
