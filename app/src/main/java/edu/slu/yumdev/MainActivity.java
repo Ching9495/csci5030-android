@@ -20,6 +20,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
+    Button savebtn;
 // ...
 
 
@@ -44,6 +46,16 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
+        savebtn = findViewById(R.id.savebtn);
+
+        savebtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Action for Savebutton should go here !
+
+            }
+        });
 
 
         // Choose authentication providers
@@ -88,11 +100,9 @@ public class MainActivity extends AppCompatActivity {
     private void write_recipe(String title, String ingridient, String recipe) {
         Recipe recipe1 = new Recipe(title,ingridient,recipe);
 
-
         mDatabase.child("recipe").child(recipe).setValue(recipe1);
 
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
