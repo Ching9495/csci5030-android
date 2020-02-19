@@ -29,9 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
-    Button savebtn;
-// ...
-
 
 
     private static final int RC_SIGN_IN = 123;
@@ -45,18 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
-        savebtn = findViewById(R.id.savebtn);
-
-        savebtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                // Action for Savebutton should go here !
-
-            }
-        });
-
 
         // Choose authentication providers
         List<AuthUI.IdpConfig> providers = Arrays.asList(
@@ -80,8 +65,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-
-
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("message");
@@ -95,13 +78,6 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-    }
-
-    private void write_recipe(String title, String ingridient, String recipe) {
-        Recipe recipe1 = new Recipe(title,ingridient,recipe);
-
-        mDatabase.child("recipe").child(recipe).setValue(recipe1);
-
     }
 
     @Override
@@ -144,26 +120,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-    public class Recipe {
-
-        public String title;
-        public String ingridients;
-        public String recipe;
-
-
-        public Recipe() {
-            // Default constructor required for calls to DataSnapshot.getValue(User.class)
-
-        }
-
-        public Recipe(String title, String ingridients, String recipe) {
-            this.title = title;
-            this.ingridients = ingridients;
-            this.recipe = recipe;
-
-        }
-
     }
 
 

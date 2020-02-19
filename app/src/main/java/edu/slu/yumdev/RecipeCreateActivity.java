@@ -1,17 +1,21 @@
 package edu.slu.yumdev;
 
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import edu.slu.yumdev.R;
 
-import android.view.View;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.UUID;
 
 public class RecipeCreateActivity extends AppCompatActivity {
+
+    private DatabaseReference mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,15 +24,47 @@ public class RecipeCreateActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        Button savebtn = findViewById(R.id.savebtn);
+
+        savebtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View v) {
+
+                String recipeId = UUID.randomUUID().toString();
+                String title = ((TextView)findViewById(R.id.title)).getText().toString();
+                String ingredients = ((TextView)findViewById(R.id.ingredients)).getText().toString();
+                String steps = ((TextView)findViewById(R.id.steps)).getText().toString();
+
+                writeRecipe(recipeId, title, ingredients, steps);
             }
         });
     }
 
+    private void writeRecipe(String recipeId, String title, String ingredient, String steps) {
+        Recipe recipe = new Recipe(recipeId, title, ingredient, steps);
+
+        mDatabase.child("recipe").child(recipeId).setValue(recipe);
+    }
+
+    public class Recipe {
+
+        public String recipeId;
+        public String title;
+        public String ingredients;
+        public String steps;
+
+        public Recipe() {
+            // Default constructor required for calls to DataSnapshot.getValue(User.class)
+        }
+
+        public Recipe(String recipeId, String title, String ingridients, String steps) {
+            this.recipeId = recipeId;
+            this.title = title;
+            this.ingredients = ingridients;
+            this.steps = steps;
+        }
+    }
 }
+
