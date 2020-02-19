@@ -1,4 +1,4 @@
-package com.slu.yumdev;
+package edu.slu.yumdev;
 
 import androidx.appcompat.app.AppCompatActivity;
 import edu.slu.yumdev.R;

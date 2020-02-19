@@ -1,4 +1,4 @@
-package com.slu.yumdev;
+package edu.slu.yumdev;
 
 import android.os.Bundle;
 
@@ -11,7 +11,7 @@ import edu.slu.yumdev.R;
 
 import android.view.View;
 
-public class activity_create extends AppCompatActivity {
+public class RecipeCreateActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.slu.yumdev.recipe">
+        <activity android:name=".recipe">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.slu.yumdev.activity_create"
+            android:name=".RecipeCreateActivity"
             android:label="@string/title_activity_create"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
