@@ -7,4 +7,9 @@
     <string name="recipe">Recipe</string>
     <string name="save">save</string>
     <string name="title_activity_create">activity_create</string>
+    <string name="recipe_name">Recipe Name</string>
+    <string name="ingredient_list">Ingredient List:</string>
+    <string name="instructions">Instructions</string>
+    <string name="empty">Empty</string>
+    <string name="no_steps">No Steps</string>
 </resources>
