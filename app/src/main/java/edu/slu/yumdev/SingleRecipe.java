@@ -38,7 +38,7 @@ public class SingleRecipe extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         // For testing purposes, get the 1 recipe we have stored already.
-        recipeID = "d5adfe16-5df2-4e2e-a8b4-3d8d187c534a";
+        recipeID = "6b3f26c5-9792-4f2f-8314-003856b79c51";
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mPostReference = FirebaseDatabase.getInstance().getReference()
@@ -128,6 +128,16 @@ public class SingleRecipe extends AppCompatActivity {
             this.title = title;
             this.ingredients = ingridients;
             this.steps = steps;
+        }
+
+        @Exclude
+        public Map<String, Object> toMap() {
+            HashMap<String, Object> result = new HashMap<>();
+            result.put("title", title);
+            result.put("ingredients", ingredients);
+            result.put("steps", title);
+
+            return result;
         }
     }
 
