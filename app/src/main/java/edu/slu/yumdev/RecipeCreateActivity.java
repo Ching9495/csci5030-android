@@ -48,23 +48,6 @@ public class RecipeCreateActivity extends AppCompatActivity {
         mDatabase.child("recipe").child(recipeId).setValue(recipe);
     }
 
-    public class Recipe {
 
-        public String recipeId;
-        public String title;
-        public String ingredients;
-        public String steps;
-
-        public Recipe() {
-            // Default constructor required for calls to DataSnapshot.getValue(User.class)
-        }
-
-        public Recipe(String recipeId, String title, String ingridients, String steps) {
-            this.recipeId = recipeId;
-            this.title = title;
-            this.ingredients = ingridients;
-            this.steps = steps;
-        }
-    }
 }
 
