@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                         // TODO: Return to the main activity here
                     }
                 });
-Ø
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
