@@ -70,4 +70,7 @@ public class SingleRecipe extends AppCompatActivity {
 
     }
 
+    // TODO: Test Here
+    // Well, first move the database read into its own function, then write a test for it.
+
 }
