@@ -18,7 +18,12 @@ public class RecipeCreateActivity extends AppCompatActivity {
     private DatabaseReference mDatabase;
 
     public RecipeCreateActivity() {
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        this(FirebaseDatabase.getInstance().getReference());
+    }
+
+    // Pass in a specific database.  (The test instance will use this)
+    public RecipeCreateActivity(DatabaseReference mDatabase) {
+        this.mDatabase = mDatabase;
     }
 
     @Override
