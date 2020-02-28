@@ -17,14 +17,17 @@ public class RecipeCreateActivity extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
 
+    public RecipeCreateActivity() {
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         Button savebtn = findViewById(R.id.savebtn);
 
@@ -42,12 +45,11 @@ public class RecipeCreateActivity extends AppCompatActivity {
         });
     }
 
+    // TODO: J's suggestion: move this to its own class
     private void writeRecipe(String recipeId, String title, String ingredient, String steps) {
         Recipe recipe = new Recipe(recipeId, title, ingredient, steps);
 
         mDatabase.child("recipe").child(recipeId).setValue(recipe);
     }
-
-
 }
 
