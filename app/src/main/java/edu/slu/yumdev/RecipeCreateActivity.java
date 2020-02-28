@@ -51,7 +51,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
     }
 
     // TODO: J's suggestion: move this to its own class
-    private void writeRecipe(String recipeId, String title, String ingredient, String steps) {
+    void writeRecipe(String recipeId, String title, String ingredient, String steps) {
         Recipe recipe = new Recipe(recipeId, title, ingredient, steps);
 
         mDatabase.child("recipe").child(recipeId).setValue(recipe);
