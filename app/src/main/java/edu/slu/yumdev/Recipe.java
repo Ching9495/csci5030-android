@@ -30,7 +30,7 @@ public class Recipe {
         HashMap<String, Object> result = new HashMap<>();
         result.put("title", title);
         result.put("ingredients", ingredients);
-        result.put("steps", title);
+        result.put("steps", steps);
 
         return result;
     }
