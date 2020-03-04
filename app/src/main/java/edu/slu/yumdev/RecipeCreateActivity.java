@@ -44,17 +44,10 @@ public class RecipeCreateActivity extends AppCompatActivity {
                 String title = ((TextView)findViewById(R.id.title)).getText().toString();
                 String ingredients = ((TextView)findViewById(R.id.ingredients)).getText().toString();
                 String steps = ((TextView)findViewById(R.id.steps)).getText().toString();
-
-                writeRecipe(recipeId, title, ingredients, steps);
+                Recipe recipe = new Recipe();
+                recipe.writeRecipe(recipeId, title, ingredients, steps,mDatabase);
             }
         });
-    }
-
-    // TODO: J's suggestion: move this to its own class
-    void writeRecipe(String recipeId, String title, String ingredient, String steps) {
-        Recipe recipe = new Recipe(recipeId, title, ingredient, steps);
-
-        mDatabase.child("recipe").child(recipeId).setValue(recipe);
     }
 }
 

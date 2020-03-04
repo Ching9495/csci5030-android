@@ -31,7 +31,8 @@ public class RecipeCreateActivityTest {
 
         // When we write a recipe...
         RecipeCreateActivity testObject = new RecipeCreateActivity(database);
-        testObject.writeRecipe(recipeId, title, ingredients, steps);
+        Recipe recipe = new Recipe();
+        recipe.writeRecipe(recipeId, title, ingredients, steps,database);
 
         // Then the recipe gets sent to the database, in the correct table, on the correct row
 

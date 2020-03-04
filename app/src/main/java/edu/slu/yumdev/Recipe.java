@@ -1,5 +1,6 @@
 package edu.slu.yumdev;
 
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
 
 import java.util.HashMap;
@@ -32,5 +33,11 @@ public class Recipe {
         result.put("steps", title);
 
         return result;
+    }
+
+    void writeRecipe(String recipeId, String title, String ingredient, String steps , DatabaseReference mDatabase) {
+        Recipe recipe = new Recipe(recipeId, title, ingredient, steps);
+
+        mDatabase.child("recipe").child(recipeId).setValue(recipe);
     }
 }
