@@ -24,6 +24,14 @@ public class SingleRecipe extends AppCompatActivity {
     private String recipeID;
     private String recipeTitle, recipeIngredients, recipeSteps;
 
+    public SingleRecipe() {
+        this(FirebaseDatabase.getInstance().getReference());
+    }
+
+    public SingleRecipe(DatabaseReference mDatabase) {
+        this.mDatabase = mDatabase;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +42,7 @@ public class SingleRecipe extends AppCompatActivity {
         // For testing purposes, get the 1 recipe we have stored already.
         recipeID = "6b3f26c5-9792-4f2f-8314-003856b79c51";
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        mPostReference = FirebaseDatabase.getInstance().getReference()
+        mPostReference = mDatabase
                 .child("recipe").child(recipeID);
 
         ValueEventListener recipeListener = new ValueEventListener() {
