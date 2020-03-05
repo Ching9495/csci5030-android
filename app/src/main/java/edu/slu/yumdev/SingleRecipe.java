@@ -2,8 +2,6 @@ package edu.slu.yumdev;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,8 +17,6 @@ public class SingleRecipe extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
     private DatabaseReference mPostReference;
-    private ValueEventListener mPostListener;
-    private String mPostKey;
     private String recipeID;
     private String recipeTitle, recipeIngredients, recipeSteps;
 
@@ -28,8 +24,21 @@ public class SingleRecipe extends AppCompatActivity {
         this(FirebaseDatabase.getInstance().getReference());
     }
 
+    // Pass in a specific database.  (The test instance will use this)
     public SingleRecipe(DatabaseReference mDatabase) {
         this.mDatabase = mDatabase;
+    }
+
+    public String getRecipeTitle(){
+        return recipeTitle;
+    }
+
+    public String getRecipeIngredients(){
+        return recipeIngredients;
+    }
+
+    public String getRecipeSteps(){
+        return recipeSteps;
     }
 
     @Override
@@ -42,12 +51,29 @@ public class SingleRecipe extends AppCompatActivity {
         // For testing purposes, get the 1 recipe we have stored already.
         recipeID = "6b3f26c5-9792-4f2f-8314-003856b79c51";
 
-        mPostReference = mDatabase
-                .child("recipe").child(recipeID);
+        readRecipe(recipeID);
+
+        TextView titleField = (TextView)findViewById(R.id.recipeTitle);
+        titleField.setText(recipeTitle);
+
+        TextView ingredientsField = (TextView)findViewById(R.id.recipeIngredients);
+        ingredientsField.setText(recipeIngredients);
+
+        TextView stepsField = (TextView)findViewById(R.id.recipeSteps);
+        stepsField.setText(recipeSteps);
+
+    }
+
+    // TODO: Test Here
+
+    public void readRecipe(String recipeID){
+
+        mPostReference = mDatabase.child("recipe").child(recipeID);
 
         ValueEventListener recipeListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 // Get Recipe object and use the values to update the UI
                 Recipe recipeSnapshot = dataSnapshot.getValue(Recipe.class);
 
@@ -64,20 +90,9 @@ public class SingleRecipe extends AppCompatActivity {
                 // ...
             }
         };
+
         mPostReference.addListenerForSingleValueEvent(recipeListener);
 
-        TextView titleField = (TextView)findViewById(R.id.recipeTitle);
-        titleField.setText(recipeTitle);
-
-        TextView ingredientsField = (TextView)findViewById(R.id.recipeIngredients);
-        ingredientsField.setText(recipeIngredients);
-
-        TextView stepsField = (TextView)findViewById(R.id.recipeSteps);
-        stepsField.setText(recipeSteps);
-
     }
-
-    // TODO: Test Here
-    // Well, first move the database read into its own function, then write a test for it.
 
 }
