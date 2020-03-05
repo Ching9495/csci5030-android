@@ -2,8 +2,6 @@ package edu.slu.yumdev;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,8 +17,6 @@ public class SingleRecipe extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
     private DatabaseReference mPostReference;
-    private ValueEventListener mPostListener;
-    private String mPostKey;
     private String recipeID;
     private String recipeTitle, recipeIngredients, recipeSteps;
 
@@ -35,19 +31,14 @@ public class SingleRecipe extends AppCompatActivity {
         recipeID = "6b3f26c5-9792-4f2f-8314-003856b79c51";
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        mPostReference = FirebaseDatabase.getInstance().getReference()
-                .child("recipe").child(recipeID);
+        mPostReference = mDatabase.child("recipe").child(recipeID);
 
         ValueEventListener recipeListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // Get Recipe object and use the values to update the UI
-                Recipe recipeSnapshot = dataSnapshot.getValue(Recipe.class);
 
-                // Set values from database for the specified recipeID
-                recipeTitle = recipeSnapshot.title.toString();
-                recipeIngredients = recipeSnapshot.ingredients.toString();
-                recipeSteps = recipeSnapshot.steps.toString();
+                // Get Recipe object and use the values to update the UI
+                readRecipe(dataSnapshot);
             }
 
             @Override
@@ -57,6 +48,7 @@ public class SingleRecipe extends AppCompatActivity {
                 // ...
             }
         };
+
         mPostReference.addListenerForSingleValueEvent(recipeListener);
 
         TextView titleField = (TextView)findViewById(R.id.recipeTitle);
@@ -71,6 +63,14 @@ public class SingleRecipe extends AppCompatActivity {
     }
 
     // TODO: Test Here
-    // Well, first move the database read into its own function, then write a test for it.
+
+    public void readRecipe(DataSnapshot snapshot){
+        Recipe recipeSnapshot = snapshot.getValue(Recipe.class);
+
+        // Set values from database for the specified recipeID
+        recipeTitle = recipeSnapshot.title.toString();
+        recipeIngredients = recipeSnapshot.ingredients.toString();
+        recipeSteps = recipeSnapshot.steps.toString();
+    }
 
 }
