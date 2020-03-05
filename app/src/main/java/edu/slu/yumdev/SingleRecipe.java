@@ -29,6 +29,18 @@ public class SingleRecipe extends AppCompatActivity {
         this.mDatabase = mDatabase;
     }
 
+    public String getRecipeTitle(){
+        return recipeTitle;
+    }
+
+    public String getRecipeIngredients(){
+        return recipeIngredients;
+    }
+
+    public String getRecipeSteps(){
+        return recipeSteps;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
