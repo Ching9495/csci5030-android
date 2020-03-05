@@ -34,19 +34,20 @@ public class SingleRecipeTest {
         Recipe recipe = new Recipe();
         recipe.writeRecipe(recipeId, title, ingredients, steps,database);
 
-        // Then the recipe gets sent to the database, in the correct table, on the correct row
+        // Create a SingleRecipe instance and invoke readRecipe()
+        SingleRecipe testObject = new SingleRecipe(database);
+        testObject.readRecipe(recipeId);
 
-        // NOTE: You have to capture the argument.  If you just compare the recipe that gets
-        // stored, java will just compare the pointers.
+        // Capture the recipe that was supposed to be stored in the mock database
         ArgumentCaptor<Recipe> argument = ArgumentCaptor.forClass(Recipe.class);
         verify(row).setValue(argument.capture());
-
-        // Compare all the recipe properties to what was passed in.
         Recipe recipeArgument = argument.getValue();
-        assertEquals(recipeArgument.recipeId, recipeId);
-        assertEquals(recipeArgument.title, title);
-        assertEquals(recipeArgument.ingredients, ingredients);
-        assertEquals(recipeArgument.steps, steps);
+
+        // Please pass.....
+        assertEquals(testObject.getRecipeTitle(), recipeArgument.title);
+        assertEquals(testObject.getRecipeIngredients(), recipeArgument.ingredients);
+        assertEquals(testObject.getRecipeSteps(), recipeArgument.steps);
+
     }
 
     private String randomString() {
