@@ -39,9 +39,7 @@ public class SingleRecipe extends AppCompatActivity {
         // For testing purposes, get the 1 recipe we have stored already.
         recipeID = "6b3f26c5-9792-4f2f-8314-003856b79c51";
 
-        mPostReference = mDatabase.child("recipe").child(recipeID);
-
-        readRecipe();
+        readRecipe(recipeID);
 
         TextView titleField = (TextView)findViewById(R.id.recipeTitle);
         titleField.setText(recipeTitle);
@@ -56,7 +54,10 @@ public class SingleRecipe extends AppCompatActivity {
 
     // TODO: Test Here
 
-    public void readRecipe(){
+    public void readRecipe(String recipeID){
+
+        mPostReference = mDatabase.child("recipe").child(recipeID);
+
         ValueEventListener recipeListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
