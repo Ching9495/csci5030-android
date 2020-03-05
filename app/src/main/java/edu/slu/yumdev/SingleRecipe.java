@@ -41,23 +41,7 @@ public class SingleRecipe extends AppCompatActivity {
 
         mPostReference = mDatabase.child("recipe").child(recipeID);
 
-        ValueEventListener recipeListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                // Get Recipe object and use the values to update the UI
-                readRecipe(dataSnapshot);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                // Getting Post failed, log a message
-                Log.w("0", "loadPost:onCancelled", databaseError.toException());
-                // ...
-            }
-        };
-
-        mPostReference.addListenerForSingleValueEvent(recipeListener);
+        readRecipe();
 
         TextView titleField = (TextView)findViewById(R.id.recipeTitle);
         titleField.setText(recipeTitle);
@@ -72,13 +56,30 @@ public class SingleRecipe extends AppCompatActivity {
 
     // TODO: Test Here
 
-    public void readRecipe(DataSnapshot snapshot){
-        Recipe recipeSnapshot = snapshot.getValue(Recipe.class);
+    public void readRecipe(){
+        ValueEventListener recipeListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-        // Set values from database for the specified recipeID
-        recipeTitle = recipeSnapshot.title.toString();
-        recipeIngredients = recipeSnapshot.ingredients.toString();
-        recipeSteps = recipeSnapshot.steps.toString();
+                // Get Recipe object and use the values to update the UI
+                Recipe recipeSnapshot = dataSnapshot.getValue(Recipe.class);
+
+                // Set values from database for the specified recipeID
+                recipeTitle = recipeSnapshot.title.toString();
+                recipeIngredients = recipeSnapshot.ingredients.toString();
+                recipeSteps = recipeSnapshot.steps.toString();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("0", "loadPost:onCancelled", databaseError.toException());
+                // ...
+            }
+        };
+
+        mPostReference.addListenerForSingleValueEvent(recipeListener);
+
     }
 
 }
