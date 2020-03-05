@@ -18,7 +18,7 @@ public class SingleRecipe extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private DatabaseReference mPostReference;
     private String recipeID;
-    private String recipeTitle, recipeIngredients, recipeSteps;
+    TextView titleField, ingredientsField, stepsField;
 
     public SingleRecipe() {
         this(FirebaseDatabase.getInstance().getReference());
@@ -27,18 +27,6 @@ public class SingleRecipe extends AppCompatActivity {
     // Pass in a specific database.  (The test instance will use this)
     public SingleRecipe(DatabaseReference mDatabase) {
         this.mDatabase = mDatabase;
-    }
-
-    public String getRecipeTitle(){
-        return recipeTitle;
-    }
-
-    public String getRecipeIngredients(){
-        return recipeIngredients;
-    }
-
-    public String getRecipeSteps(){
-        return recipeSteps;
     }
 
     @Override
@@ -51,22 +39,15 @@ public class SingleRecipe extends AppCompatActivity {
         // For testing purposes, get the 1 recipe we have stored already.
         recipeID = "6b3f26c5-9792-4f2f-8314-003856b79c51";
 
+        titleField = findViewById(R.id.recipeTitle);
+        ingredientsField = findViewById(R.id.recipeIngredients);
+        stepsField = findViewById(R.id.recipeSteps);
+
         readRecipe(recipeID);
-
-        TextView titleField = (TextView)findViewById(R.id.recipeTitle);
-        titleField.setText(recipeTitle);
-
-        TextView ingredientsField = (TextView)findViewById(R.id.recipeIngredients);
-        ingredientsField.setText(recipeIngredients);
-
-        TextView stepsField = (TextView)findViewById(R.id.recipeSteps);
-        stepsField.setText(recipeSteps);
-
     }
 
     // TODO: Test Here
-
-    public void readRecipe(String recipeID){
+    public void readRecipe(String recipeID) {
 
         mPostReference = mDatabase.child("recipe").child(recipeID);
 
@@ -78,9 +59,9 @@ public class SingleRecipe extends AppCompatActivity {
                 Recipe recipeSnapshot = dataSnapshot.getValue(Recipe.class);
 
                 // Set values from database for the specified recipeID
-                recipeTitle = recipeSnapshot.title.toString();
-                recipeIngredients = recipeSnapshot.ingredients.toString();
-                recipeSteps = recipeSnapshot.steps.toString();
+                titleField.setText(recipeSnapshot.title);
+                ingredientsField.setText(recipeSnapshot.ingredients);
+                stepsField.setText(recipeSnapshot.steps);
             }
 
             @Override
@@ -92,7 +73,6 @@ public class SingleRecipe extends AppCompatActivity {
         };
 
         mPostReference.addListenerForSingleValueEvent(recipeListener);
-
     }
 
 }
