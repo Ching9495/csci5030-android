@@ -16,7 +16,7 @@ import com.google.firebase.database.ValueEventListener;
 public class SingleRecipe extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
-    private DatabaseReference mPostReference;
+    private DatabaseReference mRecipeReference;
     private String recipeID;
     TextView titleField, ingredientsField, stepsField;
 
@@ -46,22 +46,26 @@ public class SingleRecipe extends AppCompatActivity {
         readRecipe(recipeID);
     }
 
+    // Test this...
+    void onDataChange(DataSnapshot dataSnapshot) {
+        // Get Recipe object and use the values to update the UI
+        Recipe recipeSnapshot = dataSnapshot.getValue(Recipe.class);
+
+        // Set values from database for the specified recipeID
+        titleField.setText(recipeSnapshot.title);
+        ingredientsField.setText(recipeSnapshot.ingredients);
+        stepsField.setText(recipeSnapshot.steps);
+    }
+
     // TODO: Test Here
     public void readRecipe(String recipeID) {
 
-        mPostReference = mDatabase.child("recipe").child(recipeID);
+        mRecipeReference = mDatabase.child("recipe").child(recipeID);
 
         ValueEventListener recipeListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
-                // Get Recipe object and use the values to update the UI
-                Recipe recipeSnapshot = dataSnapshot.getValue(Recipe.class);
-
-                // Set values from database for the specified recipeID
-                titleField.setText(recipeSnapshot.title);
-                ingredientsField.setText(recipeSnapshot.ingredients);
-                stepsField.setText(recipeSnapshot.steps);
+                SingleRecipe.this.onDataChange(dataSnapshot);
             }
 
             @Override
@@ -72,7 +76,7 @@ public class SingleRecipe extends AppCompatActivity {
             }
         };
 
-        mPostReference.addListenerForSingleValueEvent(recipeListener);
+        mRecipeReference.addListenerForSingleValueEvent(recipeListener);
     }
 
 }
