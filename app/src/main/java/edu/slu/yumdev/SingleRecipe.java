@@ -21,12 +21,18 @@ public class SingleRecipe extends AppCompatActivity {
     TextView titleField, ingredientsField, stepsField;
 
     public SingleRecipe() {
-        this(FirebaseDatabase.getInstance().getReference());
+        this(FirebaseDatabase.getInstance().getReference(), "");
     }
 
+    public SingleRecipe(String recipeID) {
+        this(FirebaseDatabase.getInstance().getReference(), recipeID);
+    }
+
+
     // Pass in a specific database.  (The test instance will use this)
-    public SingleRecipe(DatabaseReference mDatabase) {
+    public SingleRecipe(DatabaseReference mDatabase, String recipeID) {
         this.mDatabase = mDatabase;
+        this.recipeID = recipeID;
     }
 
     @Override

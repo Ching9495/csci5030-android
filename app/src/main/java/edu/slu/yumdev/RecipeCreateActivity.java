@@ -1,5 +1,6 @@
 package edu.slu.yumdev;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -46,6 +47,10 @@ public class RecipeCreateActivity extends AppCompatActivity {
                 String steps = ((TextView)findViewById(R.id.steps)).getText().toString();
                 Recipe recipe = new Recipe();
                 recipe.writeRecipe(recipeId, title, ingredients, steps,mDatabase);
+
+                Intent intent = new Intent(RecipeCreateActivity.this, SingleRecipe.class);
+                intent.putExtra("recipeID", recipeId);
+                startActivity(intent);
             }
         });
     }
