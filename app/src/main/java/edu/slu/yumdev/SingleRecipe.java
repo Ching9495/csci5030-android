@@ -46,18 +46,6 @@ public class SingleRecipe extends AppCompatActivity {
         readRecipe(recipeID);
     }
 
-    // Test this...
-    void onDataChange(DataSnapshot dataSnapshot) {
-        // Get Recipe object and use the values to update the UI
-        Recipe recipeSnapshot = dataSnapshot.getValue(Recipe.class);
-
-        // Set values from database for the specified recipeID
-        titleField.setText(recipeSnapshot.title);
-        ingredientsField.setText(recipeSnapshot.ingredients);
-        stepsField.setText(recipeSnapshot.steps);
-    }
-
-    // TODO: Test Here
     public void readRecipe(String recipeID) {
 
         mRecipeReference = mDatabase.child("recipe").child(recipeID);
@@ -65,7 +53,13 @@ public class SingleRecipe extends AppCompatActivity {
         ValueEventListener recipeListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                SingleRecipe.this.onDataChange(dataSnapshot);
+                // Get Recipe object and use the values to update the UI
+                Recipe recipeSnapshot = dataSnapshot.getValue(Recipe.class);
+
+                // Set values from database for the specified recipeID
+                titleField.setText(recipeSnapshot.title);
+                ingredientsField.setText(recipeSnapshot.ingredients);
+                stepsField.setText(recipeSnapshot.steps);
             }
 
             @Override
@@ -78,5 +72,4 @@ public class SingleRecipe extends AppCompatActivity {
 
         mRecipeReference.addListenerForSingleValueEvent(recipeListener);
     }
-
 }
