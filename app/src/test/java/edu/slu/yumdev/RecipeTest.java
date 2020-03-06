@@ -21,20 +21,12 @@ public class RecipeTest {
         String steps = randomString();
 
         Recipe recipe = new Recipe(recipeId, title, ingredients, steps);
-        // Given a database, with a recipe table...
-
-        DatabaseReference database = mock(DatabaseReference.class);
-        DatabaseReference table = mock(DatabaseReference.class);
-        DatabaseReference row = mock(DatabaseReference.class);
-
-        when(database.child("recipe")).thenReturn(table);
-        when(table.child(recipeId)).thenReturn(row);
 
         Map<String, Object> result = recipe.toMap();
 
-        assertEquals(recipe.toMap().get("title"),title);
-        assertEquals(recipe.toMap().get("steps"),steps);
-        assertEquals(recipe.toMap().get("ingredients"),ingredients);
+        assertEquals(result.get("title"),title);
+        assertEquals(result.get("steps"),steps);
+        assertEquals(result.get("ingredients"),ingredients);
     }
     private String randomString() {
         return UUID.randomUUID().toString();
