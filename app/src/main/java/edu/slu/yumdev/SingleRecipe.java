@@ -17,22 +17,15 @@ public class SingleRecipe extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
     private DatabaseReference mRecipeReference;
-    private String recipeID;
     TextView titleField, ingredientsField, stepsField;
 
     public SingleRecipe() {
-        this(FirebaseDatabase.getInstance().getReference(), "");
+        this(FirebaseDatabase.getInstance().getReference());
     }
-
-    public SingleRecipe(String recipeID) {
-        this(FirebaseDatabase.getInstance().getReference(), recipeID);
-    }
-
 
     // Pass in a specific database.  (The test instance will use this)
-    public SingleRecipe(DatabaseReference mDatabase, String recipeID) {
+    public SingleRecipe(DatabaseReference mDatabase) {
         this.mDatabase = mDatabase;
-        this.recipeID = recipeID;
     }
 
     @Override
@@ -43,7 +36,7 @@ public class SingleRecipe extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         // For testing purposes, get the 1 recipe we have stored already.
-        recipeID = "6b3f26c5-9792-4f2f-8314-003856b79c51";
+        String recipeID = "6b3f26c5-9792-4f2f-8314-003856b79c51";
 
         titleField = findViewById(R.id.recipeTitle);
         ingredientsField = findViewById(R.id.recipeIngredients);
