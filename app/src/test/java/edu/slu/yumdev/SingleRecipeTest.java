@@ -22,7 +22,7 @@ public class SingleRecipeTest {
         DatabaseReference table = mock(DatabaseReference.class);
         DatabaseReference row = mock(DatabaseReference.class);
 
-        when(database.child("recipee")).thenReturn(table);
+        when(database.child("recipe")).thenReturn(table);
         when(table.child(recipeId)).thenReturn(row);
 
         // Create a SingleRecipe instance and invoke readRecipe()
